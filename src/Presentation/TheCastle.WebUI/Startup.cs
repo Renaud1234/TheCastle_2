@@ -12,6 +12,7 @@ using TheCastle.WebUI.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TheCastle.Data;
 
 namespace TheCastle.WebUI
 {
@@ -30,8 +31,14 @@ namespace TheCastle.WebUI
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddDbContext<TheCastleDbContext>(options =>
+                options.UseSqlServer(
+                    Configuration.GetConnectionString("TheCastleConnection")));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddControllersWithViews();
             services.AddRazorPages();
         }
