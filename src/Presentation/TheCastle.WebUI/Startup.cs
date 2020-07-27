@@ -13,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TheCastle.Data;
+using CleanArchitectureDemo.Infrastructure.IoC;
 
 namespace TheCastle.WebUI
 {
@@ -28,13 +29,18 @@ namespace TheCastle.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // DbContext Identity
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            // DbContext The Castle entities
             services.AddDbContext<TheCastleDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("TheCastleConnection")));
+
+            // Dependency Injection
+            RegisterServices(services);
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -72,6 +78,12 @@ namespace TheCastle.WebUI
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+        }
+
+        // Register Dependency Injections
+        private static void RegisterServices(IServiceCollection services)
+        {
+            DependencyContainer.RegisterServices(services);
         }
     }
 }
