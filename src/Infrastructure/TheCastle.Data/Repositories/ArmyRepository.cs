@@ -3,10 +3,10 @@ using TheCastle.Domain.Interfaces;
 
 namespace TheCastle.Data.Repositories
 {
-    //public class ArmyRepository : GenericRepository<Army>, IArmyRepository
-    //{
-    //    public ArmyRepository(ApplicationDBContext dbContext) : base(dbContext)
-    //    {
-    //    }
-    //}
+    public class ArmyRepository : GenericRepository<Army>, IArmyRepository
+    {
+        public ArmyRepository(TheCastleDbContext dbContext) : base(dbContext)
+        {
+        }
+    }
 }

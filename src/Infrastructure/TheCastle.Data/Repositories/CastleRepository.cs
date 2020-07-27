@@ -1,9 +1,12 @@
-﻿namespace TheCastle.Data.Repositories
+﻿using TheCastle.Domain.Entities;
+using TheCastle.Domain.Interfaces;
+
+namespace TheCastle.Data.Repositories
 {
-    //public class CastleRepository : GenericRepository<Castle>, ICastleRepository
-    //{
-    //    public CastleRepository(ApplicationDBContext dbContext) : base(dbContext)
-    //    {
-    //    }
-    //}
+    public class CastleRepository : GenericRepository<Castle>, ICastleRepository
+    {
+        public CastleRepository(TheCastleDbContext dbContext) : base(dbContext)
+        {
+        }
+    }
 }
