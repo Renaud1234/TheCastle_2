@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TheCastle.Data.Persistence;
 using TheCastle.Domain.Entities.Base;
 using TheCastle.Domain.Interfaces;
 

@@ -3,8 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using TheCastle.Data;
+using TheCastle.Data.Persistence;
 
 namespace TheCastle.Data.Migrations
 {

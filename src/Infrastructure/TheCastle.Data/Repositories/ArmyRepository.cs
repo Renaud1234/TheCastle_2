@@ -1,4 +1,5 @@
-﻿using TheCastle.Domain.Entities;
+﻿using TheCastle.Data.Persistence;
+using TheCastle.Domain.Entities;
 using TheCastle.Domain.Interfaces;
 
 namespace TheCastle.Data.Repositories

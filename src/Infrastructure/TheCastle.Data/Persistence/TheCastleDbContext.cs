@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using TheCastle.Domain.Entities;
 
-namespace TheCastle.Data
+namespace TheCastle.Data.Persistence
 {
     public class TheCastleDbContext : DbContext
     {
