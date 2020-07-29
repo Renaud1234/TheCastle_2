@@ -27,15 +27,15 @@ namespace TheCastle.Data.Persistence
         // Fluent API
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDBContext).Assembly);
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(TheCastleDbContext).Assembly);
+            //base.OnModelCreating(modelBuilder);
         }
 
 
         #region Saving data changes
         public override int SaveChanges()
         {
-            throw new NotImplementedException();
+            return base.SaveChanges();
             //return base.SaveChanges();
         }
 

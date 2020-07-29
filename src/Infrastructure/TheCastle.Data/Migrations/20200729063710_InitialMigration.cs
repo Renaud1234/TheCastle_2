@@ -11,13 +11,13 @@ namespace TheCastle.Data.Migrations
                 name: "Teams",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Team = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Teams", x => x.Id);
+                    table.PrimaryKey("PK_Teams", x => x.Team);
                 });
 
             migrationBuilder.CreateTable(
@@ -27,7 +27,7 @@ namespace TheCastle.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TeamId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(maxLength: 30, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,7 +36,7 @@ namespace TheCastle.Data.Migrations
                         name: "FK_Armies_Teams_TeamId",
                         column: x => x.TeamId,
                         principalTable: "Teams",
-                        principalColumn: "Id",
+                        principalColumn: "Team",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -44,19 +44,19 @@ namespace TheCastle.Data.Migrations
                 name: "Players",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Player = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(nullable: true),
-                    TeamId = table.Column<int>(nullable: false)
+                    Name = table.Column<string>(maxLength: 30, nullable: false),
+                    Team = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Players", x => x.Id);
+                    table.PrimaryKey("PK_Players", x => x.Player);
                     table.ForeignKey(
-                        name: "FK_Players_Teams_TeamId",
-                        column: x => x.TeamId,
+                        name: "FK_Players_Teams_Team",
+                        column: x => x.Team,
                         principalTable: "Teams",
-                        principalColumn: "Id",
+                        principalColumn: "Team",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -67,15 +67,15 @@ namespace TheCastle.Data.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TeamId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
-                    ArmyId = table.Column<int>(nullable: true)
+                    Name = table.Column<string>(maxLength: 30, nullable: false),
+                    Army = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Castles", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Castles_Armies_ArmyId",
-                        column: x => x.ArmyId,
+                        name: "FK_Castles_Armies_Army",
+                        column: x => x.Army,
                         principalTable: "Armies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -83,7 +83,7 @@ namespace TheCastle.Data.Migrations
                         name: "FK_Castles_Teams_TeamId",
                         column: x => x.TeamId,
                         principalTable: "Teams",
-                        principalColumn: "Id",
+                        principalColumn: "Team",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -109,7 +109,7 @@ namespace TheCastle.Data.Migrations
                         name: "FK_DataLogs_Players_PlayerId",
                         column: x => x.PlayerId,
                         principalTable: "Players",
-                        principalColumn: "Id",
+                        principalColumn: "Player",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -119,9 +119,9 @@ namespace TheCastle.Data.Migrations
                 column: "TeamId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Castles_ArmyId",
+                name: "IX_Castles_Army",
                 table: "Castles",
-                column: "ArmyId");
+                column: "Army");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Castles_TeamId",
@@ -134,9 +134,9 @@ namespace TheCastle.Data.Migrations
                 column: "PlayerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Players_TeamId",
+                name: "IX_Players_Team",
                 table: "Players",
-                column: "TeamId");
+                column: "Team");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

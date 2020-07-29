@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheCastle.Data.Persistence;
 
 namespace TheCastle.Data.Migrations
@@ -26,7 +27,9 @@ namespace TheCastle.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
@@ -46,10 +49,13 @@ namespace TheCastle.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int?>("ArmyId")
+                        .HasColumnName("Army")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
@@ -105,13 +111,17 @@ namespace TheCastle.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("Player")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<int>("TeamId")
+                        .HasColumnName("Team")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -125,11 +135,14 @@ namespace TheCastle.Data.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnName("Team")
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.HasKey("Id");
 
@@ -149,7 +162,8 @@ namespace TheCastle.Data.Migrations
                 {
                     b.HasOne("TheCastle.Domain.Entities.Army", "Army")
                         .WithMany("Castles")
-                        .HasForeignKey("ArmyId");
+                        .HasForeignKey("ArmyId")
+                        .HasConstraintName("FK_Castles_Armies_Army");
 
                     b.HasOne("TheCastle.Domain.Entities.Team", "Team")
                         .WithMany()

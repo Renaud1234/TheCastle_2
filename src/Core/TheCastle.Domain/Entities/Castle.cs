@@ -6,7 +6,6 @@ namespace TheCastle.Domain.Entities
     {
         // Entity properties
         public string Name { get; set; }
-
         public int? ArmyId { get; set; }
 
 

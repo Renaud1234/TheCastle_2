@@ -1,8 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200728163036_InitialMigration.cs" />
+    <Compile Remove="Migrations\20200728163036_InitialMigration.Designer.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Repositories\" />

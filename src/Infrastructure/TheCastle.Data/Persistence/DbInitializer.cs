@@ -62,6 +62,9 @@ namespace TheCastle.Data.Persistence
                                  TeamId = context.Teams.FirstOrDefault(t => t.Name == "Admin").Id },
                     new Castle { Name = "Minas Morgul",
                                  ArmyId = context.Armies.Where(x => x.Name == "Orcs").FirstOrDefault().Id,
+                                 TeamId = context.Teams.FirstOrDefault(t => t.Name == "Admin").Id },
+                    new Castle { Name = "Osgiliath",
+                                 ArmyId = context.Armies.Where(x => x.Name == "Humans").FirstOrDefault().Id,
                                  TeamId = context.Teams.FirstOrDefault(t => t.Name == "Admin").Id }
                 };
                 foreach (var item in castles)
